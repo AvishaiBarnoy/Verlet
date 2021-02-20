@@ -95,7 +95,7 @@ def verlet(coord, mass, velocity,N_steps=1000,Delta_t=.1):
 	return coord, velocity, energy
 
 if __name__=='__main__':
-	path = './inp3.xyz' 
+	path = './input_files/inp3.xyz' 
 	n_atoms = read_Natoms(path)
 	mass = get_atom_mass(path)
 	coords = read_atom_coord(path)
