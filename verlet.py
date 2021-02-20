@@ -26,12 +26,14 @@ def distances(coords):
 	
 def v_lj_sys(dist,n_atoms):
 	e = 0.0661
-	s = 0.3345 # angstrom
-	s = 3.345 # nm
+	s = 0.3345 # nm
 	v = 0
 	for i in range(0,n_atoms):
 		for j in range(i+1,n_atoms):
-			v += 4*e*(math.pow(s/dist[i,j],12) - math.pow(s/dist[i,j],6))
+			# compute (s/r)**6 and then just do ((s/r)**6)**2 to get the (s/r)**12
+			v_6 = math.pow(s/dist[i,j],6) 
+			v+= math.pow(v_6,2) - v_6
+#			v += 4*e*(math.pow(s/dist[i,j],12) - math.pow(s/dist[i,j],6))
 	return v
 
 def set_velocity(n_atoms):
@@ -58,8 +60,7 @@ def get_acceleration(coord,mass):
 	'''
 	np.set_printoptions(suppress=True)
 	e = 0.0661
-	s = 0.3345 # angstrom
-	s = 3.345  # nm
+	s = 0.3345 # nm
 	a = np.zeros(coord.shape)
 	dist_mat = distances(coord)
 	for i in range(len(coord)):
