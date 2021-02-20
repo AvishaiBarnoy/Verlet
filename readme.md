@@ -1,5 +1,8 @@
-To Do:
-1. complete "get acceleration" function
-2. check if using the distnace matrix solves problem - use position relative to each other particle?
-3. maybe use another tutorial
-
+Changes 19.02:
+1. changed angstrom to nm
+2. fixed get_acceleration
+3. finished verlet algorithm
+4. formatting now produces .xyz files readable by VMD
+5. minor function changes (like get velocity)
+6. mass is now read from dictionary and not from input file
+ 
