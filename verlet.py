@@ -61,12 +61,15 @@ def get_acceleration(coord,mass):
 	s = 0.3345 # angstrom
 	s = 3.345  # nm
 	a = np.zeros(coord.shape)
+	s6 = s**6
+	s12 = s6**2
+	e24 = 24*e
 	dist_mat = distances(coord)
 	for i in range(len(coord)):
 		for j in range(i+1,len(coord)):
-			temp_x = 24*e*(coord[i][0] - coord[j][0])*(s**6/dist_mat[i,j]**8 - 2*s**12/dist_mat[i,j]**14)
-			temp_y = 24*e*(coord[i][1] - coord[j][1])*(s**6/dist_mat[i,j]**8 - 2*s**12/dist_mat[i,j]**14)
-			temp_z = 24*e*(coord[i][2] - coord[j][2])*(s**6/dist_mat[i,j]**8 - 2*s**12/dist_mat[i,j]**14)
+			temp_x = e24*(coord[i][0] - coord[j][0])*(s6/dist_mat[i,j]**8 - 2*s12/dist_mat[i,j]**14)
+			temp_y = e24*(coord[i][1] - coord[j][1])*(s6/dist_mat[i,j]**8 - 2*s12/dist_mat[i,j]**14)
+			temp_z = e24*(coord[i][2] - coord[j][2])*(s6/dist_mat[i,j]**8 - 2*s12/dist_mat[i,j]**14)
 			a[i] += [-temp_x/mass[i],-temp_y/mass[i],-temp_z/mass[i]]
 			a[j] += [temp_x/mass[j],temp_y/mass[j],temp_z/mass[j]]
 	return a
